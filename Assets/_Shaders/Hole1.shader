@@ -1,4 +1,4 @@
-﻿Shader "Kaima/Hole1"
+﻿Shader "Kaima/MeshBoolean/Hole1"
 {
 	Properties
 	{

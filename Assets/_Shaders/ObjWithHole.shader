@@ -1,4 +1,4 @@
-﻿Shader "Kaima/ObjWithHole"
+﻿Shader "Kaima/MeshBoolean/ObjWithHole"
 {
 	Properties
 	{
@@ -7,11 +7,11 @@
 	SubShader
 	{
 		Tags { "RenderType"="Opaque" }
-		LOD 100
 
 		Pass
 		{
-			Stencil {
+			Tags {"LightMode"="ForwardBase"}
+			Stencil { //写入模板值1
 				Ref 1
 				Comp Always
 				Pass Replace 
@@ -22,10 +22,12 @@
 			#pragma fragment frag
 			
 			#include "UnityCG.cginc"
+			#include "Lighting.cginc"
 
 			struct appdata
 			{
 				float4 vertex : POSITION;
+				float3 normal : NORMAL;
 				float2 uv : TEXCOORD0;
 			};
 
@@ -33,6 +35,8 @@
 			{
 				float2 uv : TEXCOORD0;
 				float4 vertex : SV_POSITION;
+				float3 worldNormal : TEXCOORD1;
+				float4 worldPos : TEXCOORD2;
 			};
 
 			sampler2D _MainTex;
@@ -43,13 +47,20 @@
 				v2f o;
 				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+				o.worldNormal = UnityObjectToWorldNormal(v.normal);
+				o.worldPos = mul(unity_ObjectToWorld, v.vertex);
 				return o;
 			}
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
 				fixed4 col = tex2D(_MainTex, i.uv);
-				return col;
+
+				float3 worldNormal = normalize(i.worldNormal);
+				float3 worldLightDir = normalize(_WorldSpaceLightPos0).xyz;
+				fixed3 diffuse = _LightColor0.rgb * col.rgb * saturate(dot(worldNormal, worldLightDir));
+
+				return fixed4(diffuse, 1);
 			}
 			ENDCG
 		}
