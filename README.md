@@ -11,10 +11,11 @@ Unity 5.4.0f3
 # Scenes
 ## 差集
 #### JustWriteZ场景
-![JustWriteZ](https://github.com/KaimaChen/MeshBoolean/blob/master/Blog/JustWriteZ.PNG)
-思路就是在你想制造洞的物体前写入孔洞的Z值，这样孔洞部分就镂空出来了。
-在本例子中，JustWriteZ的渲染次序在2001，而地面的渲染次序在2002。
-这种方法很简单，但是容易把别的东西（只要渲染次序在JustWriteZ之后）都镂空，而且这种镂空是中穿物体的，而不能做到表面剜出孔的效果。
+![JustWriteZ](https://github.com/KaimaChen/MeshBoolean/blob/master/Blog/JustWriteZ.PNG)  
+思路就是在你想制造洞的物体前写入孔洞的Z值，这样孔洞部分就镂空出来了。  
+在本例子中，JustWriteZ的渲染次序在2001，而地面的渲染次序在2002。  
+这种方法很简单，但是容易把别的东西（只要渲染次序在JustWriteZ之后）都镂空，而且这种镂空是中穿物体的，而不能做到表面剜出孔的效果。  
 
 ## 合集
 #### JustWriteBackZ场景
+![JustWriteBackZ](https://github.com/KaimaChen/MeshBoolean/blob/master/Blog/JustWriteBackZ.PNG)  
