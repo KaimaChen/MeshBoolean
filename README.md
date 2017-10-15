@@ -19,3 +19,7 @@ Unity 5.4.0f3
 
 #### ClipHoleByDistance场景
 ![ClipHoleByDistance](https://github.com/KaimaChen/MeshBoolean/blob/master/Blog/ClipHoleByDistance.PNG)
+
+## 弹坑
+弹坑部分密集化，其他部分尽量稀疏。
+![GroundManager](https://github.com/KaimaChen/MeshBoolean/blob/master/Blog/GroundManager.PNG)
